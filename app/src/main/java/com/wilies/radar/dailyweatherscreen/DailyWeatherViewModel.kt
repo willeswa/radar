@@ -34,7 +34,7 @@ class DailyWeatherViewModel: ViewModel(){
     private fun getWeatherForecast() {
         coroutineScope.launch {
             var getWeatherDeferred = WeatherApi.retrofitService.getWeatherPredictions(
-                    0.660450, 28.761551, "21de641062c535eadf648e52e2a263c0")
+                    0.660450, 28.761551, "API_KEY")
 
             try {
 
