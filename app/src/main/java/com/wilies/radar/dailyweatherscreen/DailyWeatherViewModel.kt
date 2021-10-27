@@ -1,14 +1,15 @@
 package com.wilies.radar.dailyweatherscreen
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wilies.radar.WeatherApi
-import com.wilies.radar.data.WeatherRepository
 import com.wilies.radar.data.models.WeatherResponse
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,9 +17,13 @@ import retrofit2.Response
 class DailyWeatherViewModel: ViewModel(){
 
 
-    private val _response = MutableLiveData<String>()
+    private val _response = MutableLiveData<WeatherResponse>()
 
-    val response: LiveData<String>
+    private val dailyWeatherJob = Job()
+
+    private val coroutineScope = CoroutineScope(dailyWeatherJob + Dispatchers.Main)
+
+    val response: LiveData<WeatherResponse>
         get() = _response
 
 
@@ -27,16 +32,23 @@ class DailyWeatherViewModel: ViewModel(){
     }
 
     private fun getWeatherForecast() {
-        WeatherApi.retrofitService.getWeatherPredictions(0.660450, 28.761551, "API_KEY").enqueue(object : Callback<String>{
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                Log.i("DailyWeatherViewModel", ""+response.body())
+        coroutineScope.launch {
+            var getWeatherDeferred = WeatherApi.retrofitService.getWeatherPredictions(
+                    0.660450, 28.761551, "API_KEY")
+
+            try {
+
+                _response.value = getWeatherDeferred
+            } catch (ex: Exception){
+                Log.i("TAG", ""+ex.message)
             }
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.i("DailyWeatherViewModel", "Nopew")
-            }
 
-        })
+        }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        dailyWeatherJob.cancel()
+    }
 }
