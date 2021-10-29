@@ -14,7 +14,12 @@ data class WeatherResponse(
 data class Weather(
     val dt: Double,
     val temp: Double,
+    val uvi: Double,
+    val wind_speed: Double,
+    val humidity: Double,
+    @Json(name = "feels_like") val feelsLike: Double,
     @Json(name = "weather") val weather: List<WeatherDescription>
+
 )
 
-data class WeatherDescription(val id: Int, val main: String)
+data class WeatherDescription(val id: Int, val description: String, val icon: String)
