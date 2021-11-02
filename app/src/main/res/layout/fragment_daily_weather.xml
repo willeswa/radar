@@ -5,10 +5,8 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.wilies.radar.dailyweatherscreen.DailyWeatherViewModel" />
-        <variable
-            name="adapter"
-            type="com.wilies.radar.adapters.WeatherRecyclerAdapter" />
+            type="com.wilies.radar.MainViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -89,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
-                android:text="Fri, 29th Oct"
+                app:setFormattedDate="@{viewmodel.response.current.dt}"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -218,7 +216,7 @@
                     android:padding="8dp">
 
                     <ImageView
-                        android:id="@+id/uv"
+                        android:id="@+id/uv_tomorrow"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:scaleType="center"
@@ -234,7 +232,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        app:layout_constraintStart_toEndOf="@+id/uv"
+                        app:layout_constraintStart_toEndOf="@+id/uv_tomorrow"
                         app:layout_constraintTop_toTopOf="parent"
                         app:setText="@{viewmodel.response.current.uvi}"
                         tools:text="0.9" />
@@ -245,7 +243,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:text="UV Intensity"
-                        app:layout_constraintStart_toEndOf="@+id/uv"
+                        app:layout_constraintStart_toEndOf="@+id/uv_tomorrow"
                         app:layout_constraintTop_toBottomOf="@+id/uv_tv" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -364,7 +362,7 @@
             app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/navigate_to_forecast"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -380,13 +378,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="8dp"
+            app:submitList="@{viewmodel.response.hourly}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Today"
-            app:setAdapter="@{adapter}"
-            app:submitList="@{viewmodel.hourly_predictions}"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/home_screen_recycler_item"
             tools:orientation="horizontal">
@@ -416,7 +413,8 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/roboto"
                 android:gravity="center"
-                android:padding="16dp"
+                android:paddingStart="32dp"
+                android:paddingRight="32dp"
                 android:text="Like rain for the fields, I make a difference in the world by simply existing in it."
                 android:textAlignment="center"
                 android:textColor="@color/primary" />

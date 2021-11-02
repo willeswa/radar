@@ -1,26 +1,23 @@
 package com.wilies.radar.dailyweatherscreen
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.wilies.radar.MainViewModel
 import com.wilies.radar.R
-import com.wilies.radar.adapters.WeatherRecyclerAdapter
+import com.wilies.radar.adapters.DailyWeatherRecyclerAdapter
 import com.wilies.radar.databinding.FragmentDailyWeatherBinding
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class DailyWeatherFragment : Fragment() {
-    private val viewModel: DailyWeatherViewModel by viewModels()
+    private val viewModel: MainViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -33,13 +30,17 @@ class DailyWeatherFragment : Fragment() {
             container,
             false)
 
-        val adapter = WeatherRecyclerAdapter()
+        val adapter = DailyWeatherRecyclerAdapter()
 
         binding.dailyweatherRecycler.adapter = adapter
 
         binding.lifecycleOwner = this
 
         binding.viewmodel = viewModel
+
+        binding.navigateToForecast.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
 
 
 

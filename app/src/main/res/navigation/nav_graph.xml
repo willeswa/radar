@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/startScreen">
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -14,20 +14,19 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment"
-            app:enterAnim="@android:anim/slide_out_right"
-            app:exitAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
             app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.wilies.radar.forecastscreen.ForecastWeatherFragment"
-        android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_forecast_weather">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment"
-            app:exitAnim="@android:anim/slide_out_right" />
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/startScreen"
@@ -37,8 +36,8 @@
         <action
             android:id="@+id/action_startScreen_to_FirstFragment"
             app:destination="@id/FirstFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_out_right"
             app:launchSingleTop="true"
             app:popUpTo="@id/FirstFragment" />
     </fragment>

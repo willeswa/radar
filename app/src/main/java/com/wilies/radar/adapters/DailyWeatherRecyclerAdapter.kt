@@ -1,16 +1,12 @@
 package com.wilies.radar.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.wilies.radar.data.models.Weather
 import com.wilies.radar.databinding.HomeScreenRecyclerItemBinding
-import com.wilies.radar.utils.Utility
 
-class WeatherRecyclerAdapter: RecyclerView.Adapter<WeatherRecyclerAdapter.ViewHolder>() {
+class DailyWeatherRecyclerAdapter: RecyclerView.Adapter<DailyWeatherRecyclerAdapter.ViewHolder>() {
     private var data = listOf<Weather>()
 
 
