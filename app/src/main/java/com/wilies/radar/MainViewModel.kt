@@ -1,4 +1,4 @@
-package com.wilies.radar.dailyweatherscreen
+package com.wilies.radar
 
 import android.app.Application
 import android.util.Log
@@ -14,32 +14,24 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class DailyWeatherViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     //hide the mutable response
     private val _response = MutableLiveData<WeatherResponse>()
 
-    val hourly_predictions = Transformations.map(_response){
-        it.hourly
-    }
+
 
     //immutable response exposed to the views
     val response: LiveData<WeatherResponse>
         get() = _response
 
 
-    val currentPropertyDate = Transformations.map(response) {
-        Utility.getDateTime(it.current.dt)
-    }
 
     val currentWeather = Transformations.map(response){
         it.current.weather[0]
     }
 
-    val tempInCelsius = Transformations.map(_response){
-        it.current.temp - 273.15
-    }
 
 
 
@@ -57,7 +49,7 @@ class DailyWeatherViewModel(application: Application) : AndroidViewModel(applica
     private fun getWeatherForecast() {
         coroutineScope.launch {
             var getWeatherDeferred = WeatherApi.retrofitService.getWeatherPredictions(
-                    0.660450, 28.761551, "21de641062c535eadf648e52e2a263c0")
+                    -1.3140785 ,36.8002512, "21de641062c535eadf648e52e2a263c0")
             try {
                 _response.value = getWeatherDeferred
             } catch (ex: Exception) {

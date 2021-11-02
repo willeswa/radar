@@ -10,9 +10,11 @@
 
     </style>
 
-    <style name="ThemeOverlay.App.Toolbar" parent="">
+    <style name="ThemeOverlay.App.Toolbar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/secondary_dark</item>
-        <item name="colorPrimaryVariant">@color/primary_light</item>
-        <item name="colorOnPrimary">@color/secondary_dark</item>
+        <item name="colorPrimaryVariant">@color/secondary_dark</item>
+        <item name="colorOnPrimary">@color/primary</item>
     </style>
+
+
 </resources>

@@ -1,12 +1,12 @@
 package com.wilies.radar.adapters
 
-import android.graphics.drawable.Drawable
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.wilies.radar.data.models.DailyWeather
 import com.wilies.radar.data.models.Weather
 import com.wilies.radar.data.models.WeatherDescription
 import com.wilies.radar.utils.Utility
@@ -22,15 +22,19 @@ fun setImageFromInternet(view: ImageView, weather: WeatherDescription?){
         .into(view)
 }
 
-@BindingAdapter("setAdapter")
-fun setAdapter(recyclerView: RecyclerView, adapter: WeatherRecyclerAdapter?){
-    adapter?.let { recyclerView.adapter = it }
+@BindingAdapter("submitForecastList")
+fun submitForecastList(recyclerView: RecyclerView, list: List<DailyWeather>?){
+    val adapter = recyclerView?.adapter as ForecastRecyclerAdapter
+    adapter?.setList(list?:listOf())
 }
 
 
+
+
+
 @BindingAdapter("submitList")
-fun submitList(recyclerView: RecyclerView?, list: List<Weather>?){
-    val adapter = recyclerView?.adapter as WeatherRecyclerAdapter
+fun submitDailyList(recyclerView: RecyclerView?, list: List<Weather>?){
+    val adapter = recyclerView?.adapter as DailyWeatherRecyclerAdapter
     adapter?.setList(list?:listOf())
 }
 
@@ -44,4 +48,10 @@ fun setCardTemp(textView:TextView, weather:Weather?){
 @BindingAdapter("setText")
 fun setText(textView: TextView, value: Double?){
     textView.text = value.toString()
+}
+
+
+@BindingAdapter("setFormattedDate")
+fun setFormattedDate(view: TextView, value: Double){
+    value?.let{view.text = Utility.getDateTime(value)}
 }
