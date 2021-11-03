@@ -91,7 +91,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="8dp"
                     tools:text="30"
-                    app:setText="@{viewmodel.response.daily.get(1).temp.max}"
+                    app:setTempValue="@{viewmodel.response.daily.get(1).temp.max}"
                     android:textColor="@color/white"
                     app:layout_constraintStart_toEndOf="@+id/imageView5"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -105,7 +105,7 @@
                     android:textColor="@color/white"
                     app:layout_constraintBaseline_toBaselineOf="@+id/textView14"
                     app:layout_constraintStart_toEndOf="@+id/textView14"
-                    app:setText="@{viewmodel.response.daily.get(1).temp.min}"
+                    app:setTempValue="@{viewmodel.response.daily.get(1).temp.min}"
                     tools:text="23" />
 
                 <TextView
@@ -185,7 +185,7 @@
                             android:padding="2dp"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            app:setText="@{viewmodel.response.daily.get(1).temp.day}" />
+                            app:setTempValue="@{viewmodel.response.daily.get(1).temp.day}" />
 
                         <TextView
                             android:layout_width="match_parent"

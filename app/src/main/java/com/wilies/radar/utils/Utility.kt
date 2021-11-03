@@ -16,6 +16,9 @@ object Utility {
         }
     }
 
+    fun toCelsius(temp: Double) = (temp - 273).toInt().toString()
+
+
     fun setIconForWeather(current: Weather): String? {
 
         return when(current.weather[0].description.toLowerCase()){

@@ -54,7 +54,7 @@
                 android:textColor="@color/primary"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
                 app:layout_constraintEnd_toStartOf="@+id/textView13"
-                app:setText="@{weather.temp.max}" />
+                app:setTempValue="@{weather.temp.max}" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -67,7 +67,7 @@
                 android:textColor="@color/primary"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:setText="@{weather.temp.min}" />
+                app:setTempValue="@{weather.temp.min}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
