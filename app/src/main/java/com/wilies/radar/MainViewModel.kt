@@ -49,7 +49,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun getWeatherForecast() {
         coroutineScope.launch {
             var getWeatherDeferred = WeatherApi.retrofitService.getWeatherPredictions(
-                    -1.3140785 ,36.8002512, "21de641062c535eadf648e52e2a263c0")
+                    -1.3140785 ,36.8002512, "")
             try {
                 _response.value = getWeatherDeferred
             } catch (ex: Exception) {

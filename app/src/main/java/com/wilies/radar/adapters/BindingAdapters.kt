@@ -29,7 +29,10 @@ fun submitForecastList(recyclerView: RecyclerView, list: List<DailyWeather>?){
 }
 
 
-
+@BindingAdapter("setTempValue")
+fun setTempValue(textView: TextView, temp: Double){
+    textView.text = Utility.toCelsius(temp)
+}
 
 
 @BindingAdapter("submitList")
@@ -41,7 +44,7 @@ fun submitDailyList(recyclerView: RecyclerView?, list: List<Weather>?){
 @BindingAdapter("setCardTemp")
 fun setCardTemp(textView:TextView, weather:Weather?){
     weather?.let{
-        textView.text = (it.temp - 273).toInt().toString()
+        textView.text = Utility.toCelsius(it.temp)
     }
 }
 
