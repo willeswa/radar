@@ -1,11 +1,10 @@
 package com.wilies.radar.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.wilies.radar.data.models.DailyWeather
 import com.wilies.radar.databinding.ForecastRecyclerItemBinding
+import com.wilies.radar.domain.DailyWeather
 
 class ForecastRecyclerAdapter: RecyclerView.Adapter<ForecastRecyclerAdapter.ViewHolder>() {
 

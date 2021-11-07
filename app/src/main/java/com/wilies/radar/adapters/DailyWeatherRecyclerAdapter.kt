@@ -3,8 +3,8 @@ package com.wilies.radar.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.wilies.radar.data.models.Weather
 import com.wilies.radar.databinding.HomeScreenRecyclerItemBinding
+import com.wilies.radar.domain.Weather
 
 class DailyWeatherRecyclerAdapter: RecyclerView.Adapter<DailyWeatherRecyclerAdapter.ViewHolder>() {
     private var data = listOf<Weather>()
