@@ -6,7 +6,7 @@
     <data>
         <variable
             name="weather"
-            type="com.wilies.radar.data.models.DailyWeather" />
+            type="com.wilies.radar.domain.DailyWeather" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -29,7 +29,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:setImageFromInternet="@{weather.weather.get(0)}"
+                app:setImageFromInternet="@{weather.weatherDes.get(0)}"
                 app:srcCompat="@drawable/ic_twotone_waves_24" />
 
             <TextView

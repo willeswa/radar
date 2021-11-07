@@ -1,11 +1,9 @@
-package com.wilies.radar
+package com.wilies.radar.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.wilies.radar.data.models.WeatherResponse
+import com.wilies.radar.network.NetworkResponseContainer
 import com.wilies.radar.utils.Constants
-import kotlinx.coroutines.Deferred
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -26,7 +24,7 @@ interface WeatherApiService{
     suspend fun getWeatherPredictions(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double,
-        @Query("appid") appid:String ): WeatherResponse
+        @Query("appid") appid:String ): NetworkResponseContainer
 }
 
 object WeatherApi {

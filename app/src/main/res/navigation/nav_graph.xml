@@ -2,12 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
     app:startDestination="@id/startScreen">
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.wilies.radar.dailyweatherscreen.DailyWeatherFragment"
+        android:name="com.wilies.radar.ui.dailyweatherscreen.DailyWeatherFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_daily_weather">
 
@@ -19,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.wilies.radar.forecastscreen.ForecastWeatherFragment"
+        android:name="com.wilies.radar.ui.forecastscreen.ForecastWeatherFragment"
         tools:layout="@layout/fragment_forecast_weather">
 
         <action

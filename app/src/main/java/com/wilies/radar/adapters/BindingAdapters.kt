@@ -6,9 +6,9 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.wilies.radar.data.models.DailyWeather
-import com.wilies.radar.data.models.Weather
-import com.wilies.radar.data.models.WeatherDescription
+import com.wilies.radar.domain.DailyWeather
+import com.wilies.radar.domain.Weather
+import com.wilies.radar.domain.WeatherDescription
 import com.wilies.radar.utils.Utility
 
 
@@ -57,4 +57,10 @@ fun setText(textView: TextView, value: Double?){
 @BindingAdapter("setFormattedDate")
 fun setFormattedDate(view: TextView, value: Double){
     value?.let{view.text = Utility.getDateTime(value)}
+}
+
+
+@BindingAdapter("setTimeOfDay")
+fun setTimeOfDay(textView: TextView, value: Double){
+    value?.let{textView.text = Utility.getTimeOfTheDay(value)}
 }

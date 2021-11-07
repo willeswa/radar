@@ -1,4 +1,4 @@
-package com.wilies.radar.forecastscreen
+package com.wilies.radar.ui.forecastscreen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

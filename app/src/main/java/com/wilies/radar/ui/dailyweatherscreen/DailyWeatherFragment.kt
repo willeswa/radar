@@ -1,4 +1,4 @@
-package com.wilies.radar.dailyweatherscreen
+package com.wilies.radar.ui.dailyweatherscreen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
