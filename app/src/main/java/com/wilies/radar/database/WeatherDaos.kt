@@ -8,42 +8,34 @@ import retrofit2.http.DELETE
 @Dao
 interface WeatherDao{
 
-    @Transaction
-    @Query("SELECT * FROM current_weather")
-    fun getCurrentWeather(): LiveData<List<CurrentWeatherWithDescription>>
+    @Query("SELECT * FROM current_weathers")
+    fun getCurrentWeather(): LiveData<List<CurrentWeatherEntity>>
 
-    @Query("SELECT * FROM current_weather ORDER BY dt ASC")
-    fun getHourlyWeather(): LiveData<List<WeatherEntity>>
+    @Query("SELECT * FROM hourly_weathers")
+    fun getHourlyWeather(): LiveData<List<HourlyWeatherEntity>>
 
-    @Query("SELECT * FROM daily_weathers")
+    @Query("SELECT * FROM daily_weather")
     fun getDailyWeather(): LiveData<List<DailyWeatherEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTemp(vararg temps: TempEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertWeather(vararg weather: WeatherEntity)
+    fun insertCurrentWeather(vararg currentWeather: CurrentWeatherEntity)
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertHourlyWeather(vararg weather: WeatherEntity)
+    fun insertHourlyWeather(vararg currentWeather: HourlyWeatherEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDailyWeather(vararg weather: DailyWeatherEntity)
+    fun insertDailyWeather(vararg currentWeather: DailyWeatherEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertWeatherDescription(vararg desc: WeatherDescriptionEntity)
+    @Query("DELETE FROM current_weathers")
+    fun deleteCurrentWeather()
 
-    @Query("DELETE FROM current_weather")
-    fun deleteWeather()
 
-    @Query("DELETE FROM daily_weathers")
-    fun deleteDailyWeather()
-
-    @Query("DELETE FROM hourly_weather")
+    @Query("DELETE FROM hourly_weathers ")
     fun deleteHourlyWeather()
 
-
-
-
+    @Query("DELETE FROM daily_weather")
+    fun deleteDailyWeather()
 
 }

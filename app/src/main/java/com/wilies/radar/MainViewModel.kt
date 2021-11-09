@@ -32,6 +32,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val currentWeather = repository.currentWeather
     val hourlyWeather = repository.hourlyData
+    val dailyWeather = repository.dailyData
 
 
 

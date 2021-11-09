@@ -1,6 +1,5 @@
 package com.wilies.radar.utils
 
-import com.wilies.radar.domain.Weather
 import java.text.SimpleDateFormat
 import java.util.*
 

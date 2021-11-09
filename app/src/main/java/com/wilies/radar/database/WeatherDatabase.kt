@@ -7,12 +7,10 @@ import androidx.room.RoomDatabase
 import com.wilies.radar.database.models.*
 
 @Database(
-    entities = [TempEntity::class,
-        WeatherEntity::class,
-        WeatherDescriptionEntity::class,
+    entities = [CurrentWeatherEntity::class,
         DailyWeatherEntity::class,
         HourlyWeatherEntity::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class WeatherDatabase : RoomDatabase() {

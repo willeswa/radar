@@ -2,27 +2,29 @@ package com.wilies.radar.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.wilies.radar.database.WeatherDatabase
-import com.wilies.radar.database.asDomainModel
-import com.wilies.radar.database.models.WeatherEntity
-import com.wilies.radar.database.toHourlyDomain
-import com.wilies.radar.domain.Weather
-import com.wilies.radar.domain.WeatherWithDescription
+import com.wilies.radar.database.*
+import com.wilies.radar.domain.*
 import com.wilies.radar.network.WeatherApi
-import com.wilies.radar.network.asDailyDataModel
-import com.wilies.radar.network.asDatabaseModel
-import com.wilies.radar.network.asHourlyDataModel
+import com.wilies.radar.network.asCurrentWeatherDataModel
+import com.wilies.radar.network.asDailyWeatherDataModel
+import com.wilies.radar.network.asHourlyWeatherDataModel
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class WeatherRepository(private val database: WeatherDatabase) {
 
-    val currentWeather: LiveData<List<WeatherWithDescription>> = Transformations.map(database.weatherDao.getCurrentWeather()){
-        it.asDomainModel()
+    val currentWeather: LiveData<List<CurrentWeatherDomain>> = Transformations.map(database.weatherDao.getCurrentWeather()){
+        it.asCurrentWeatherDomain()
     }
 
-    val hourlyData: LiveData<List<Weather>> = Transformations.map(database.weatherDao.getHourlyWeather()){
-        it.toHourlyDomain()
+    val hourlyData: LiveData<List<HourlyWeatherDomain>> = Transformations.map(database.weatherDao.getHourlyWeather()){
+        it.asHourlyWeatherDomain()
+    }
+
+
+    val dailyData: LiveData<List<DailyWeatherDomain>> = Transformations.map(database.weatherDao.getDailyWeather()){
+        it.asDailyWeatherDomain()
     }
 
 
@@ -33,11 +35,10 @@ class WeatherRepository(private val database: WeatherDatabase) {
 
     suspend fun refreshWeather() {
         withContext(Dispatchers.IO){
-
-            val weather = WeatherApi.retrofitService.getWeatherPredictions(-1.3140785 ,36.8002512, "eae24bf8b5610f12c69dfc270622552e")
-            database.weatherDao.insertWeather(weather.current.asDatabaseModel())
-            database.weatherDao.insertDailyWeather(*weather.daily.asDailyDataModel())
-            database.weatherDao.insertHourlyWeather(*weather.hourly.asHourlyDataModel())
+            val weather = WeatherApi.retrofitService.getWeatherPredictions(-1.3140785 ,36.8002512, "")
+            database.weatherDao.insertCurrentWeather(weather.asCurrentWeatherDataModel())
+            database.weatherDao.insertHourlyWeather(*weather.asHourlyWeatherDataModel())
+            database.weatherDao.insertDailyWeather(*weather.asDailyWeatherDataModel())
         }
     }
 

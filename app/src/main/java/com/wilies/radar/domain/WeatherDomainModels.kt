@@ -2,31 +2,30 @@ package com.wilies.radar.domain
 
 
 
-data class WeatherWithDescription(
-        val current: Weather?,
-        val hourly: List<Weather>?,
-        val daily: List<DailyWeather>?
-)
-
-data class Weather(
-        val dt: Double,
+data class CurrentWeatherDomain(
+        val dt: Long,
+        val icon: String,
         val temp: Double,
+        val windSpeed: Double,
         val uvi: Double,
-        val wind_speed: Double,
         val humidity: Double,
-        val feelsLike: Double,
-        val weatherDes: List<WeatherDescription>?,
-        val associatedWeather: Double
+        val feelsLike: Double
 )
 
-data class Temp(val day: Double?, val max: Double?, val min: Double?)
 
-data class DailyWeather(
-        val dt: Double,
-        val temp: Temp?,
+data class HourlyWeatherDomain(
+        val dt: Long,
+        val icon: String,
+        val temp: Double,
+)
+
+
+data class DailyWeatherDomain(
+        val dt: Long,
+        val icon: String,
+        val maxTemp: Double,
+        val minTemp: Double,
+        val daysTemp: Double,
         val uvi: Double,
-        val wind_speed: Double,
-        val weatherDes: List<WeatherDescription>?
+        val windSpeed: Double
 )
-
-data class WeatherDescription(val description: String, val icon: String, val associatedWeatherId: Double)
