@@ -4,64 +4,39 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
+@Entity(tableName = "current_weathers")
+data class CurrentWeatherEntity(
 
-@Entity(tableName = "hourly_weather")
-data class HourlyWeatherEntity constructor(
         @PrimaryKey
-        var dt: Double,
-        var temp: Double,
-        var associatedWeatherId: Double,
+        val dt: Long,
+        val icon: String,
+        val temp: Double,
+        val windSpeed: Double,
+        val uvi: Double,
+        val humidity: Double,
+        val feelsLike: Double
 )
 
 
-@Entity(tableName = "current_weather")
-data class WeatherEntity constructor(
+@Entity(tableName = "hourly_weathers")
+data class HourlyWeatherEntity(
+
         @PrimaryKey
-        var dt: Double,
-        var temp: Double,
-        var uvi: Double,
-        var wind_speed: Double,
-        var humidity: Double,
-        var feelsLike: Double,
-        var associatedWeatherId: Double,
-        @Ignore var weatherDesc: List<WeatherDescriptionEntity>?
+        val dt: Long,
+        val icon: String,
+        val temp: Double,
+)
 
-){
-        constructor(
 
-            ) : this(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,null)
-}
-
-@Entity(tableName = "daily_weathers")
+@Entity(tableName = "daily_weather")
 data class DailyWeatherEntity(
+
         @PrimaryKey
-        var dt: Double,
-        var uvi: Double,
-        var wind_speed: Double,
-        @Ignore var temp: TempEntity?,
-        @Ignore var weatherDesc: List<WeatherDescriptionEntity>?
-){
-        constructor(): this(0.0, 0.0, 0.0, null, null)
-}
-
-@Entity(tableName = "weather_descriptions")
-data class WeatherDescriptionEntity constructor(
-        @PrimaryKey
-        var description: String,
-        var icon: String,
-        var associatedWeatherId: Double,
-     )
-
-
-@Entity(tableName = "temp")
-data class TempEntity constructor(
-        @PrimaryKey
-        var day: Double,
-        var max: Double,
-        var min: Double,
-        var associatedWeatherId: Double,
-        )
-
-
-
-
+        val dt: Long,
+        val icon: String,
+        val maxTemp: Double,
+        val minTemp: Double,
+        val daysTemp: Double,
+        val uvi: Double,
+        val windSpeed: Double
+)

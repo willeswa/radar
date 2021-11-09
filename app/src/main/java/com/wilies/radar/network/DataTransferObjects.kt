@@ -13,7 +13,7 @@ data class NetworkResponseContainer(
 
 @JsonClass(generateAdapter = true)
 data class DTOWeather(
-        val dt: Double,
+        val dt: Long,
         val temp: Double,
         @Json(name = "feels_like") val feelsLike: Double,
         @Json(name = "wind_speed") val windSpeed: Double,
@@ -30,7 +30,7 @@ data class DTOWeatherDescription(
 
 @JsonClass(generateAdapter = true)
 data class DTODailyWeather(
-        val dt: Double,
+        val dt: Long,
         val uvi: Double,
         @Json(name = "wind_speed") val windSpeed: Double,
         val temp: DTOTemp,

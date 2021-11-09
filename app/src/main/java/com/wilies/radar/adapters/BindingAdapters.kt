@@ -6,24 +6,22 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.wilies.radar.domain.DailyWeather
-import com.wilies.radar.domain.Weather
-import com.wilies.radar.domain.WeatherDescription
+import com.wilies.radar.domain.*
 import com.wilies.radar.utils.Utility
 
 
 
 @BindingAdapter("setImageFromInternet")
-fun setImageFromInternet(view: ImageView, weather: WeatherDescription?){
-    Log.i("TAAG"+view.id.toString(), weather.toString())
-    Glide.with(view.context)
-        .load(weather?.let {
-            Utility.getIconUrl(it.icon) })
-        .into(view)
+fun setImageFromInternet(view: ImageView, icon: String?){
+  icon?.let{
+      Glide.with(view.context)
+          .load(Utility.getIconUrl(icon))
+          .into(view)
+  }
 }
 
 @BindingAdapter("submitForecastList")
-fun submitForecastList(recyclerView: RecyclerView, list: List<DailyWeather>?){
+fun submitForecastList(recyclerView: RecyclerView, list: List<DailyWeatherDomain>?){
     val adapter = recyclerView?.adapter as ForecastRecyclerAdapter
     adapter?.setList(list?:listOf())
 }
@@ -36,17 +34,12 @@ fun setTempValue(textView: TextView, temp: Double){
 
 
 @BindingAdapter("submitList")
-fun submitDailyList(recyclerView: RecyclerView?, list: List<Weather>?){
+fun submitDailyList(recyclerView: RecyclerView?, list: List<HourlyWeatherDomain>?){
+    Log.i("RECYCLEERRRRR", ""+list?.size)
     val adapter = recyclerView?.adapter as DailyWeatherRecyclerAdapter
     adapter?.setList(list?:listOf())
 }
 
-@BindingAdapter("setCardTemp")
-fun setCardTemp(textView:TextView, weather:Weather?){
-    weather?.let{
-        textView.text = Utility.toCelsius(it.temp)
-    }
-}
 
 @BindingAdapter("setText")
 fun setText(textView: TextView, value: Double?){

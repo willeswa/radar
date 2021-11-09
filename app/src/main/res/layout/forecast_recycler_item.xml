@@ -6,7 +6,7 @@
     <data>
         <variable
             name="weather"
-            type="com.wilies.radar.domain.DailyWeather" />
+            type="com.wilies.radar.domain.DailyWeatherDomain" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -26,10 +26,10 @@
                 android:id="@+id/imageView2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                app:setImageFromInternet="@{weather.icon}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:setImageFromInternet="@{weather.weatherDes.get(0)}"
                 app:srcCompat="@drawable/ic_twotone_waves_24" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:textColor="@color/primary"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
                 app:layout_constraintEnd_toStartOf="@+id/textView13"
-                app:setTempValue="@{weather.temp.max}" />
+                app:setTempValue="@{weather.maxTemp}" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -67,7 +67,7 @@
                 android:textColor="@color/primary"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:setTempValue="@{weather.temp.min}" />
+                app:setTempValue="@{weather.minTemp}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

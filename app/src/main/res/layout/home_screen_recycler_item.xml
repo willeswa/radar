@@ -6,7 +6,7 @@
     <data>
         <variable
             name="weather"
-            type="com.wilies.radar.domain.Weather" />
+            type="com.wilies.radar.domain.HourlyWeatherDomain" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -28,7 +28,7 @@
                 android:layout_height="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:setImageFromInternet="@{weather.weatherDes.get(0)}"
+                app:setImageFromInternet="@{weather.icon}"
                 tools:srcCompat="@drawable/ic_rain_icon" />
 
             <TextView
@@ -58,7 +58,7 @@
                     android:layout_weight="1"
                     android:text="30"
                     android:textColor="@color/white"
-                    app:setCardTemp="@{weather}" />
+                    app:setTempValue="@{weather.temp}" />
 
                 <TextView
                     android:id="@+id/textView7"

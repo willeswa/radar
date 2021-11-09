@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wilies.radar.databinding.HomeScreenRecyclerItemBinding
-import com.wilies.radar.domain.Weather
+import com.wilies.radar.domain.DailyWeatherDomain
+import com.wilies.radar.domain.HourlyWeatherDomain
+
 
 class DailyWeatherRecyclerAdapter: RecyclerView.Adapter<DailyWeatherRecyclerAdapter.ViewHolder>() {
-    private var data = listOf<Weather>()
+    private var data = listOf<HourlyWeatherDomain>()
 
 
 
@@ -25,14 +27,14 @@ class DailyWeatherRecyclerAdapter: RecyclerView.Adapter<DailyWeatherRecyclerAdap
         return data.size
     }
 
-    fun setList(it: List<Weather>) {
+    fun setList(it: List<HourlyWeatherDomain>) {
         data = it
         notifyDataSetChanged()
     }
 
     class ViewHolder(private val binding: HomeScreenRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(weatherItem: Weather) {
+        fun bind(weatherItem: HourlyWeatherDomain) {
             binding.weather = weatherItem
             binding.executePendingBindings()
 
