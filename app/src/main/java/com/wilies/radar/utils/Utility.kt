@@ -5,9 +5,9 @@ import java.util.*
 
 object Utility {
 
-    fun getDateTime(timestamp: Double):String?{
+    fun getFormattedDateTime(timestamp: Double, dateFormat: String):String{
         return try {
-            val simpleFormat = SimpleDateFormat("EEE, MMM yyyy")
+            val simpleFormat = SimpleDateFormat(dateFormat)
             val newDate = Date(timestamp.toLong()*1000)
             simpleFormat.format(newDate)
         } catch (e: Exception){

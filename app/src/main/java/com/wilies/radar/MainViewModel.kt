@@ -34,6 +34,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val hourlyWeather = repository.hourlyData
     val dailyWeather = repository.dailyData
 
+    val isLoading: LiveData<Boolean> = Transformations.map(dailyWeather){
+     it.isEmpty()
+    }
+
 
 
 

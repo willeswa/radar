@@ -47,13 +47,7 @@ fun setText(textView: TextView, value: Double?){
 }
 
 
-@BindingAdapter("setFormattedDate")
-fun setFormattedDate(view: TextView, value: Double){
-    value?.let{view.text = Utility.getDateTime(value)}
-}
-
-
-@BindingAdapter("setTimeOfDay")
-fun setTimeOfDay(textView: TextView, value: Double){
-    value?.let{textView.text = Utility.getTimeOfTheDay(value)}
+@BindingAdapter("timestamp", "dateFormat")
+fun setDate(view: TextView, timestamp: Double, dateFormat: String){
+    view.text = Utility.getFormattedDateTime(timestamp, dateFormat)
 }

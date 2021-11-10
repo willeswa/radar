@@ -24,8 +24,9 @@ class ForecastRecyclerAdapter: RecyclerView.Adapter<ForecastRecyclerAdapter.View
     override fun getItemCount() = data.size
 
     fun setList(list: List<DailyWeatherDomain>) {
-        Log.i("THEEEE MIGHT GOAL", ""+list.size)
         data = list
+        notifyDataSetChanged()
+
     }
 
     class ViewHolder(private val binding: ForecastRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
