@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         @Suppress("Unused variable")
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
     }
 
 

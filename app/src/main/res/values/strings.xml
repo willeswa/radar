@@ -2,6 +2,7 @@
     <string name="app_name">radar</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="word_day_date_month_year">EEE, d MMM yyyy</string>
+    <string name="word_day_date_month">EEE, d MMM</string>
+    <string name="time_of_the_day">h a</string>
 </resources>

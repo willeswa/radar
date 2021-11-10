@@ -14,16 +14,16 @@ import kotlinx.coroutines.withContext
 
 class WeatherRepository(private val database: WeatherDatabase) {
 
-    val currentWeather: LiveData<List<CurrentWeatherDomain>> = Transformations.map(database.weatherDao.getCurrentWeather()){
+    val currentWeather: LiveData<List<CurrentWeatherDomain?>> = Transformations.map(database.weatherDao.getCurrentWeather()){
         it.asCurrentWeatherDomain()
     }
 
-    val hourlyData: LiveData<List<HourlyWeatherDomain>> = Transformations.map(database.weatherDao.getHourlyWeather()){
+    val hourlyData: LiveData<List<HourlyWeatherDomain?>> = Transformations.map(database.weatherDao.getHourlyWeather()){
         it.asHourlyWeatherDomain()
     }
 
 
-    val dailyData: LiveData<List<DailyWeatherDomain>> = Transformations.map(database.weatherDao.getDailyWeather()){
+    val dailyData: LiveData<List<DailyWeatherDomain?>> = Transformations.map(database.weatherDao.getDailyWeather()){
         it.asDailyWeatherDomain()
     }
 
