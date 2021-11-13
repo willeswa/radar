@@ -1,6 +1,7 @@
 package com.wilies.radar
 
 import android.app.Application
+import android.content.Context
 import android.os.Build
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
@@ -16,11 +17,18 @@ import java.util.concurrent.TimeUnit
 class WeatherApplication: Application() {
     private val applicationScope = CoroutineScope(Dispatchers.IO)
 
+    companion object {
+        lateinit var APPLICATION_CONTEXT: Application
+    }
+
+
     override fun onCreate() {
         super.onCreate()
         applicationScope.launch{
             syncWeatherData()
         }
+
+        APPLICATION_CONTEXT = this
     }
 
 

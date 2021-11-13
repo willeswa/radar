@@ -1,9 +1,13 @@
 package com.wilies.radar.utils
 
+import android.net.ConnectivityManager
+import com.wilies.radar.WeatherApplication
 import java.text.SimpleDateFormat
 import java.util.*
 
 object Utility {
+
+    private lateinit var application: WeatherApplication
 
     fun getFormattedDateTime(timestamp: Double, dateFormat: String):String{
         return try {
@@ -32,6 +36,13 @@ object Utility {
 
     fun getIconUrl(rainIcon: String): String?{
         return "http://openweathermap.org/img/wn/$rainIcon@2x.png"
+    }
+
+    fun isInternetOn(): Boolean {
+        val networkManager = WeatherApplication.APPLICATION_CONTEXT.getSystemService(
+            ConnectivityManager::class.java)
+        val currentNetwork = networkManager.activeNetwork
+        return currentNetwork != null
     }
 }
 

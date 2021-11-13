@@ -38,5 +38,6 @@ data class DailyWeatherEntity(
         val minTemp: Double,
         val daysTemp: Double,
         val uvi: Double,
-        val windSpeed: Double
+        val windSpeed: Double,
+        val description: String
 )

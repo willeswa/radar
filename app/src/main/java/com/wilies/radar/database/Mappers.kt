@@ -8,8 +8,8 @@ import com.wilies.radar.domain.DailyWeatherDomain
 import com.wilies.radar.domain.HourlyWeatherDomain
 
 
-fun List<CurrentWeatherEntity>.asCurrentWeatherDomain(): List<CurrentWeatherDomain> {
-    return map{
+fun CurrentWeatherEntity.asCurrentWeatherDomain(): CurrentWeatherDomain {
+    return let{
          CurrentWeatherDomain(
              dt = it.dt,
              icon = it.icon,
@@ -43,7 +43,8 @@ fun List<DailyWeatherEntity>.asDailyWeatherDomain(): List<DailyWeatherDomain>{
             minTemp = it.minTemp,
             daysTemp = it.daysTemp,
             uvi = it.uvi,
-            windSpeed = it.windSpeed
+            windSpeed = it.windSpeed,
+            description = it.description
         )
     }
 }

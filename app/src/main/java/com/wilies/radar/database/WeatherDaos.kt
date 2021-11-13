@@ -8,8 +8,8 @@ import retrofit2.http.DELETE
 @Dao
 interface WeatherDao{
 
-    @Query("SELECT * FROM current_weathers")
-    fun getCurrentWeather(): LiveData<List<CurrentWeatherEntity>>
+    @Query("SELECT * FROM current_weathers LIMIT 1")
+    fun getCurrentWeather(): LiveData<CurrentWeatherEntity>
 
     @Query("SELECT * FROM hourly_weathers")
     fun getHourlyWeather(): LiveData<List<HourlyWeatherEntity>>

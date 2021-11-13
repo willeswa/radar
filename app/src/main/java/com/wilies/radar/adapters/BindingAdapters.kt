@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.wilies.radar.R
 import com.wilies.radar.domain.*
 import com.wilies.radar.utils.Utility
 
@@ -16,6 +17,7 @@ fun setImageFromInternet(view: ImageView, icon: String?){
   icon?.let{
       Glide.with(view.context)
           .load(Utility.getIconUrl(icon))
+          .placeholder(R.drawable.ic_baseline_broken_image_24)
           .into(view)
   }
 }
@@ -42,7 +44,7 @@ fun submitDailyList(recyclerView: RecyclerView?, list: List<HourlyWeatherDomain>
 
 
 @BindingAdapter("setText")
-fun setText(textView: TextView, value: Double?){
+fun toText(textView: TextView, value: Double?){
     textView.text = value.toString()
 }
 

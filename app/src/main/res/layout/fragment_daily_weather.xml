@@ -16,21 +16,46 @@
         android:background="@color/secondary_dark"
         tools:context=".ui.dailyweatherscreen.DailyWeatherFragment">
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:visibility="@{viewmodel.isLoading ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:trackColor="@color/primary" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/primary"
+                app:showAnimationBehavior="outward" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="Hold on, I'm prepping the data..."
+                android:textColor="@color/primary" />
+        </LinearLayout>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:visibility="@{viewmodel.isLoading ? View.GONE : View.VISIBLE}"
             android:id="@+id/constraintLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="@{ !viewmodel.isLoading &amp;&amp; viewmodel.dailyWeather.size > 0 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/textView15"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -83,7 +108,7 @@
                             android:src="@drawable/ic_rain_icon"
                             app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:setImageFromInternet="@{viewmodel.currentWeather.get(0).icon}" />
+                            app:setImageFromInternet="@{viewmodel.currentWeather.icon}" />
 
                         <LinearLayout
                             android:id="@+id/linearLayout4"
@@ -110,7 +135,7 @@
                                 android:alpha="0.7"
                                 android:textColor="@color/white"
                                 app:dateFormat="@{@string/word_day_date_month_year}"
-                                app:timestamp="@{viewmodel.currentWeather.get(0).dt}" />
+                                app:timestamp="@{viewmodel.currentWeather.dt}" />
 
                         </LinearLayout>
 
@@ -134,7 +159,7 @@
                             app:layout_constraintHorizontal_bias="0.47"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:setTempValue="@{viewmodel.currentWeather.get(0).temp}"
+                            app:setTempValue="@{viewmodel.currentWeather.temp}"
                             tools:text="30" />
 
                         <TextView
@@ -209,7 +234,7 @@
                                         android:padding="2dp"
                                         app:layout_constraintStart_toEndOf="@+id/wind"
                                         app:layout_constraintTop_toTopOf="parent"
-                                        app:setText="@{viewmodel.currentWeather.get(0).windSpeed}"
+                                        app:setText="@{viewmodel.currentWeather.windSpeed}"
                                         tools:text="23" />
 
                                     <TextView
@@ -257,7 +282,7 @@
                                         android:layout_marginStart="10dp"
                                         app:layout_constraintStart_toEndOf="@+id/uv_tomorrow"
                                         app:layout_constraintTop_toTopOf="parent"
-                                        app:setText="@{viewmodel.currentWeather.get(0).uvi}"
+                                        app:setText="@{viewmodel.currentWeather.uvi}"
                                         tools:text="0.9" />
 
                                     <TextView
@@ -310,7 +335,7 @@
                                         android:layout_marginStart="10dp"
                                         app:layout_constraintStart_toEndOf="@+id/humidity"
                                         app:layout_constraintTop_toTopOf="parent"
-                                        app:setText="@{viewmodel.currentWeather.get(0).humidity}"
+                                        app:setText="@{viewmodel.currentWeather.humidity}"
                                         tools:text="0.8" />
 
                                     <TextView
@@ -356,7 +381,7 @@
                                         android:layout_marginStart="10dp"
                                         app:layout_constraintStart_toEndOf="@+id/imageView3"
                                         app:layout_constraintTop_toTopOf="parent"
-                                        app:setTempValue="@{viewmodel.currentWeather.get(0).temp}"
+                                        app:setTempValue="@{viewmodel.currentWeather.temp}"
                                         tools:text="23km/h" />
 
                                     <TextView
@@ -446,7 +471,19 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_light"
+            android:padding="4dp"
+            android:text="No internet connection!"
+            android:textAlignment="center"
+            android:textColor="@color/secondary_dark"
+            android:visibility="@{viewmodel.isInternetOn ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
