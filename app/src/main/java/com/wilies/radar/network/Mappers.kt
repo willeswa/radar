@@ -38,7 +38,8 @@ fun NetworkResponseContainer.asDailyWeatherDataModel(): Array<DailyWeatherEntity
             minTemp = it.temp.min,
             daysTemp = it.temp.day,
             uvi = it.uvi,
-            windSpeed = it.windSpeed
+            windSpeed = it.windSpeed,
+            description = it.weatherDescription[0].description
         )
     }.toTypedArray()
 }

@@ -4,35 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewmodel"
             type="com.wilies.radar.MainViewModel" />
 
     </data>
 
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondary_dark">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/secondary_dark"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="@{viewmodel.dailyWeather.size > 0 ? View.VISIBLE : View.GONE}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:context=".ui.forecastscreen.ForecastWeatherFragment">
 
         <com.google.android.material.appbar.AppBarLayout
 
             android:id="@+id/forecast_layout"
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/forecast_toolbar"
-                    android:background="@color/secondary_dark"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:title=""
-                    app:titleTextColor="@color/primary"
-                    style="@style/Radar.App.Toolbar"/>
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/forecast_toolbar"
+                style="@style/Radar.App.Toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/secondary_dark"
+                android:title=""
+                app:titleTextColor="@color/primary" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -61,9 +72,9 @@
                     android:layout_height="70dp"
                     android:layout_marginStart="100dp"
                     android:layout_marginTop="4dp"
-                    app:setImageFromInternet="@{viewmodel.dailyWeather.get(0).icon}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6"
+                    app:setImageFromInternet="@{viewmodel.dailyWeather.get(0).icon}"
                     tools:src="@tools:sample/avatars" />
 
                 <TextView
@@ -72,17 +83,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:paddingBottom="16dp"
-                    app:timestamp="@{viewmodel.dailyWeather.get(0).dt}"
-                    app:dateFormat="@{@string/word_day_date_month_year}"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textColor="@color/white"
                     android:textStyle="normal"
+                    app:dateFormat="@{@string/word_day_date_month_year}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:timestamp="@{viewmodel.dailyWeather.get(0).dt}" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -91,11 +102,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="8dp"
-                    tools:text="30"
-                    app:setTempValue="@{viewmodel.dailyWeather.get(0).maxTemp}"
                     android:textColor="@color/white"
                     app:layout_constraintStart_toEndOf="@+id/imageView5"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView6"
+                    app:setTempValue="@{viewmodel.dailyWeather.get(0).maxTemp}"
+                    tools:text="30" />
 
                 <TextView
                     android:id="@+id/textView9"
@@ -116,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:capitalize="words"
-                    android:text="@{viewmodel.dailyWeather.get(0).icon}"
+                    android:text="@{viewmodel.dailyWeather.get(0).description}"
                     android:textColor="@color/primary"
                     app:layout_constraintStart_toEndOf="@+id/imageView5"
                     app:layout_constraintTop_toBottomOf="@+id/textView8"
@@ -143,7 +154,8 @@
                             android:layout_height="24dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_twotone_waves_24"
-                            app:tint="@color/primary" />
+                            app:tint="@color/primary"
+                            tools:srcCompat="@drawable/ic_twotone_air_24" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -265,4 +277,18 @@
             tools:listitem="@layout/forecast_recycler_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Hold on..."
+        android:textColor="@color/primary"
+        android:visibility="@{viewmodel.dailyWeather.size > 0 ? View.GONE : View.VISIBLE}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

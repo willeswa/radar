@@ -26,10 +26,10 @@
                 android:id="@+id/imageView2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:setImageFromInternet="@{weather.icon}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:setImageFromInternet="@{weather.icon}"
                 app:srcCompat="@drawable/ic_twotone_waves_24" />
 
             <TextView
