@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.wilies.radar.MainViewModel
 import com.wilies.radar.R
@@ -17,7 +18,7 @@ import com.wilies.radar.databinding.FragmentDailyWeatherBinding
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class DailyWeatherFragment : Fragment() {
-    private val viewModel: MainViewModel by activityViewModels()
+    private val viewModel: MainViewModel by viewModels()
 
 
     override fun onCreateView(

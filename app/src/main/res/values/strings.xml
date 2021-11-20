@@ -5,4 +5,7 @@
     <string name="word_day_date_month_year">EEE, d MMM yyyy</string>
     <string name="word_day_date_month">EEE, d MMM</string>
     <string name="time_of_the_day">h a</string>
+    <string name="channel_id">WEATHER_REFRESH_CHANNEL_ID</string>
+    <string name="channel_name_weather_sync">Weather update</string>
+    <string name="channel_description_weather_sync">Sync weather data with the server</string>
 </resources>

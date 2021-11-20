@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -20,7 +21,7 @@ import com.wilies.radar.databinding.FragmentForecastWeatherBinding
  */
 class ForecastWeatherFragment : Fragment() {
 
-    val viewModel: MainViewModel by activityViewModels()
+    val viewModel: ForecastScreenViewModel by viewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -28,11 +29,12 @@ class ForecastWeatherFragment : Fragment() {
     ): View? {
         val binding: FragmentForecastWeatherBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_forecast_weather, container, false)
 
-        binding.lifecycleOwner = this
-
         val adapter = ForecastRecyclerAdapter()
-        binding.viewmodel = viewModel
         binding.forecastRecycler.adapter = adapter
+
+        binding.lifecycleOwner = this
+        binding.viewmodel = viewModel
+
 
         val appBarConfig = AppBarConfiguration(findNavController().graph)
         binding.forecastToolbar.setupWithNavController(findNavController(), appBarConfig)

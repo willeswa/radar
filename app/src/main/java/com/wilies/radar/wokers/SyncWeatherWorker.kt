@@ -18,7 +18,7 @@ class SyncWeatherWorker(private val context: Context, workerParams: WorkerParame
         val repository = WeatherRepository(database)
 
         return try {
-            repository.refreshWeather()
+            repository.syncLocalWeatherWithServer(true)
             Result.success()
         } catch (e: HttpException){
             Result.retry()

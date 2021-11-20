@@ -9,7 +9,7 @@
         <item name="colorSecondary">@color/secondary_light</item>
         <item name="colorSecondaryVariant">@color/secondary_dark</item>
         <item name="colorOnSecondary">@color/black</item>
-        <item name="fontFamily">@font/baloo_thambi</item>
+        <item name="fontFamily">@font/roboto</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->

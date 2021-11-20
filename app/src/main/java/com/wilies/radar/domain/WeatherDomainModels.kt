@@ -30,3 +30,8 @@ data class DailyWeatherDomain(
         val windSpeed: Double,
         val description: String
 )
+
+data class Coordinates(
+        val lat: Double,
+        val lon: Double
+)
