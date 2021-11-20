@@ -7,7 +7,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewmodel"
-            type="com.wilies.radar.MainViewModel" />
+            type="com.wilies.radar.ui.forecastscreen.ForecastScreenViewModel" />
 
     </data>
 
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:visibility="@{viewmodel.dailyWeather.size > 0 ? View.VISIBLE : View.GONE}"
+        android:visibility="@{!viewmodel.isLoading &amp;&amp; viewmodel.dailyWeather.size > 0 ? View.VISIBLE : View.GONE}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
                     android:layout_marginTop="4dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6"
-                    app:setImageFromInternet="@{viewmodel.dailyWeather.get(0).icon}"
+                    app:setImageFromInternet="@{viewmodel.tomorrowsWeather.icon}"
                     tools:src="@tools:sample/avatars" />
 
                 <TextView
@@ -93,7 +93,7 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:timestamp="@{viewmodel.dailyWeather.get(0).dt}" />
+                    app:timestamp="@{viewmodel.tomorrowsWeather.dt}" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -105,7 +105,7 @@
                     android:textColor="@color/white"
                     app:layout_constraintStart_toEndOf="@+id/imageView5"
                     app:layout_constraintTop_toBottomOf="@+id/textView6"
-                    app:setTempValue="@{viewmodel.dailyWeather.get(0).maxTemp}"
+                    app:setTempValue="@{viewmodel.tomorrowsWeather.maxTemp}"
                     tools:text="30" />
 
                 <TextView
@@ -117,7 +117,7 @@
                     android:textColor="@color/white"
                     app:layout_constraintBaseline_toBaselineOf="@+id/textView14"
                     app:layout_constraintStart_toEndOf="@+id/textView14"
-                    app:setTempValue="@{viewmodel.dailyWeather.get(0).minTemp}"
+                    app:setTempValue="@{viewmodel.tomorrowsWeather.minTemp}"
                     tools:text="23" />
 
                 <TextView
@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:capitalize="words"
-                    android:text="@{viewmodel.dailyWeather.get(0).description}"
+                    android:text="@{viewmodel.tomorrowsWeather.description}"
                     android:textColor="@color/primary"
                     app:layout_constraintStart_toEndOf="@+id/imageView5"
                     app:layout_constraintTop_toBottomOf="@+id/textView8"
@@ -164,7 +164,7 @@
                             android:padding="2dp"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            app:setText="@{viewmodel.dailyWeather.get(0).windSpeed}" />
+                            app:setText="@{viewmodel.tomorrowsWeather.windSpeed}" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -198,7 +198,7 @@
                             android:padding="2dp"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            app:setTempValue="@{viewmodel.dailyWeather.get(0).daysTemp}" />
+                            app:setTempValue="@{viewmodel.tomorrowsWeather.daysTemp}" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -232,7 +232,7 @@
                             android:padding="2dp"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            app:setText="@{viewmodel.dailyWeather.get(0).uvi}" />
+                            app:setText="@{viewmodel.tomorrowsWeather.uvi}" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -285,7 +285,7 @@
         android:gravity="center"
         android:text="Hold on..."
         android:textColor="@color/primary"
-        android:visibility="@{viewmodel.dailyWeather.size > 0 ? View.GONE : View.VISIBLE}"
+        android:visibility="@{viewmodel.isLoading ? View.VISIBLE : View.GONE}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

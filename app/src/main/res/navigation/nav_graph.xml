@@ -13,8 +13,7 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:launchSingleTop="false" />
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -37,7 +36,6 @@
             app:destination="@id/FirstFragment"
             app:enterAnim="@android:anim/slide_out_right"
             app:exitAnim="@android:anim/slide_out_right"
-            app:launchSingleTop="true"
             app:popUpTo="@id/FirstFragment" />
     </fragment>
 </navigation>

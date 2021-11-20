@@ -1,5 +1,6 @@
 package com.wilies.radar.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -17,14 +18,13 @@ import com.wilies.radar.network.asHourlyWeatherDataModel
 import com.wilies.radar.utils.Utility
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.lang.Thread.sleep
-import java.sql.Time
 
 class WeatherRepository(private val database: WeatherDatabase) {
 
     val isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
 
     val isInternetOn: MutableLiveData<Boolean> = MutableLiveData(true)
+
 
     val currentWeather: LiveData<CurrentWeatherDomain?> =
         Transformations.map(database.weatherDao.getCurrentWeather()) {
@@ -42,36 +42,40 @@ class WeatherRepository(private val database: WeatherDatabase) {
             it.asDailyWeatherDomain()
         }
 
-    val cacheCopyExists = Transformations.map(currentWeather){
-        it != null
+
+    suspend fun syncLocalWeatherWithServer(mainLoad: Boolean) {
+
+     withContext(Dispatchers.IO){
+         try {
+             if(mainLoad){
+                 Utility.isInternetOn()
+                 val weather = WeatherApi.retrofitService.getWeatherPredictions(
+                     Utility.currentCoordinates().lat,
+                     Utility.currentCoordinates().lon,
+                     Utility.getApiKey()
+                 )
+                 database.weatherDao.deleteDailyWeather()
+                 database.weatherDao.deleteCurrentWeather()
+                 database.weatherDao.deleteHourlyWeather()
+                 database.weatherDao.insertCurrentWeather(weather.asCurrentWeatherDataModel())
+                 database.weatherDao.insertHourlyWeather(*weather.asHourlyWeatherDataModel())
+                 database.weatherDao.insertDailyWeather(*weather.asDailyWeatherDataModel())
+                 if(Utility.getCurrentHourTime() == 20){
+                     Utility.notifyUserAboutUpdate(weather.daily[0], false)
+                 } else {
+                     Utility.notifyUserAboutUpdate(weather.daily[0], true)
+                 }
+             }
+         } catch (e: Exception){
+             isInternetOn.postValue(false)
+
+         } finally {
+             isLoading.postValue(false)
+         }
+     }
+
     }
 
-
-
-
-
-    suspend fun refreshWeather() {
-        withContext(Dispatchers.IO) {
-        if(Utility.isInternetOn()){
-            val weather = WeatherApi.retrofitService.getWeatherPredictions(
-                -1.3140785,
-                36.8002512,
-                "bd6894074bc3be75555ebf7fa5ea4788"
-            )
-            database.weatherDao.deleteDailyWeather()
-            database.weatherDao.deleteCurrentWeather()
-            database.weatherDao.deleteHourlyWeather()
-            database.weatherDao.insertCurrentWeather(weather.asCurrentWeatherDataModel())
-            database.weatherDao.insertHourlyWeather(*weather.asHourlyWeatherDataModel())
-            database.weatherDao.insertDailyWeather(*weather.asDailyWeatherDataModel())
-        }else {
-            isInternetOn.postValue(false)
-        }
-        }
-
-        isLoading.postValue(false)
-
-    }
 
 
 }

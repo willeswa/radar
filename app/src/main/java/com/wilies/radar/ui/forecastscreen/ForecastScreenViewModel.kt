@@ -1,7 +1,8 @@
-package com.wilies.radar
+package com.wilies.radar.ui.forecastscreen
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.Transformations
 import com.wilies.radar.database.getDatabase
 import com.wilies.radar.repository.WeatherRepository
 import kotlinx.coroutines.CoroutineScope
@@ -9,36 +10,34 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
+class ForecastScreenViewModel(application: Application): AndroidViewModel(application){
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-
-    //a job to manage the coroutines
-    private val dailyWeatherJob = Job()
-
-    // a coroutine scope to handle the network execution
-    private val coroutineScope = CoroutineScope(dailyWeatherJob + Dispatchers.Main)
 
     private val database = getDatabase(application)
     private val repository = WeatherRepository(database)
-    var isLoading = repository.isLoading
 
+    private val job = Job()
+
+    private val coroutineScope = CoroutineScope(job + Dispatchers.Main)
+    val isLoading = repository.isLoading
 
     init {
-
         coroutineScope.launch {
-            repository.syncLocalWeatherWithServer(true)
-        }
+            repository.syncLocalWeatherWithServer(false)
+            }
     }
 
-    val currentWeather = repository.currentWeather
-    val hourlyWeather = repository.hourlyData
     val dailyWeather = repository.dailyData
     val isInternetOn = repository.isInternetOn
-
+    val tomorrowsWeather = Transformations.map(dailyWeather){
+        it.getOrNull(0)
+    }
 
     override fun onCleared() {
         super.onCleared()
-        dailyWeatherJob.cancel()
+        job.cancel()
     }
+
+
 }
